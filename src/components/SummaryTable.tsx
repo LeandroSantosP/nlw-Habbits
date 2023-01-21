@@ -5,7 +5,7 @@ import { generateDatesFromYearBeginning } from "../utils/generate-dates-from-yea
 import { HabbitDay } from "./HabbitDay";
 
 const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"];
-const summaryDates = generateDatesFromYearBeginning()
+const summaryDates = generateDatesFromYearBeginning();
 const minumoSummaryDatesSize = 18 * 7 // 18 weeks
 
 type summayProps = Array<{
@@ -16,14 +16,13 @@ type summayProps = Array<{
 }>
 
 export const SummaryTable = () => {
-   const [summary, setSummary] = useState<summayProps>([])
+   const [summary, setSummary] = useState<summayProps>([]);
 
    const amountOfDaysOfFill = minumoSummaryDatesSize - summaryDates.length;
 
    useEffect(() => {
       api.get('summary').then(response => setSummary(response.data));
    }, []);
-   console.log(summary);
 
    return (
       <div className="w-full flex">
@@ -39,7 +38,7 @@ export const SummaryTable = () => {
          </div>
 
          <div className="grid grid-rows-7 grid-flow-col gap-3 ">
-            {summaryDates.map(date => {
+            {summary.length > 0 && summaryDates.map(date => {
                const dayInSummary = summary.find(day => {
                   return dayjs(date).isSame(day.date, 'day')
                })
@@ -49,7 +48,7 @@ export const SummaryTable = () => {
                      key={date.toString()}
                      date={date}
                      amount={dayInSummary?.amount}
-                     completed={dayInSummary?.completed}
+                     defaultCompleted={dayInSummary?.completed}
                   />
                )
             })}

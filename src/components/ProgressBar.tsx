@@ -6,8 +6,8 @@ export const ProgressBar = (props: ProgressBarProps) => {
 
    const progressStyle = {
       width: `${props.progress}%`
-   }
 
+   }
 
    return (
       <div className='h-3 rounded-xl bg-zinc-700 w-full mt-4 '>
@@ -15,7 +15,7 @@ export const ProgressBar = (props: ProgressBarProps) => {
             role="progressbar"
             aria-label='progresso de abitos completados nesse dia'
             aria-valuenow={props.progress}
-            className='h-3 rounded-xl bg-violet-600'
+            className='h-3 rounded-xl bg-violet-600 transition-all'
             style={progressStyle}
          />
       </div>
